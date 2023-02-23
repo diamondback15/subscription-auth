@@ -17,7 +17,7 @@ const SignIn = () => {
     }
   }, [user]);
   
-  console.log(getURL(), process?.env?.NEXT_PUBLIC_SITE_URL, process?.env?.NEXT_PUBLIC_VERCEL_URL);
+  console.log(getURL(), process?.env?.SITE_URL,  process?.env?.VERCEL_URL, process?.env?.NEXT_PUBLIC_VERCEL_URL);
   
 
   if (!user)
