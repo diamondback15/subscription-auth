@@ -15,10 +15,7 @@ const SignIn = () => {
     if (user) {
       router.replace('/account');
     }
-  }, [user]);
-  
-  console.log(getURL(), process?.env?.NEXT_PUBLIC_SITE_URKL, process?.env?.NEXT_PUBLIC_VERCEL_URL);
-  
+  }, [user]);  
 
   if (!user)
     return (
