@@ -16,6 +16,9 @@ const SignIn = () => {
       router.replace('/account');
     }
   }, [user]);
+  
+  console.log(getURL());
+  
 
   if (!user)
     return (
