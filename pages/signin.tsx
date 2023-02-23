@@ -28,7 +28,7 @@ const SignIn = () => {
             <Auth
               supabaseClient={supabaseClient}
               providers={['github']}
-              redirectTo={getURL()}
+              redirectTo={'https://123test.com'}
               magicLink={true}
               appearance={{
                 theme: ThemeSupa,
