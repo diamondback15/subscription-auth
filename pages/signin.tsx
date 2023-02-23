@@ -28,7 +28,7 @@ const SignIn = () => {
             <Auth
               supabaseClient={supabaseClient}
               providers={['github']}
-              redirectTo={'https://123test.com'}
+              redirectTo={'https://subscription-auth.vercel.app'}
               magicLink={true}
               appearance={{
                 theme: ThemeSupa,
