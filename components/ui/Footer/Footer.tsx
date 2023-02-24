@@ -6,8 +6,8 @@ import GitHub from 'components/icons/GitHub';
 
 export default function Footer() {
   return (
-    <footer className="mx-auto max-w-[1920px] px-6 bg-zinc-900">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-zinc-600 py-12 text-white transition-colors duration-150 bg-zinc-900">
+    <footer className="mx-auto max-w-[1920px] px-6 bg-gray-800">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-zinc-600 py-12 text-white transition-colors duration-150 bg-gray-800">
         <div className="col-span-1 lg:col-span-2">
           <Link href="/">
             <a className="flex flex-initial items-center font-bold md:mr-24">
@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4 bg-zinc-900">
+      <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4 bg-gray-800">
         <div>
           <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
         </div>

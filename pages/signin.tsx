@@ -15,7 +15,7 @@ const SignIn = () => {
     if (user) {
       router.replace('/account');
     }
-  }, [user]);  
+  }, [user]);
 
   if (!user)
     return (
@@ -27,7 +27,7 @@ const SignIn = () => {
           <div className="flex flex-col space-y-4">
             <Auth
               supabaseClient={supabaseClient}
-              providers={['github']}
+              providers={['github', 'google']}
               redirectTo={getURL()}
               magicLink={true}
               appearance={{
@@ -38,6 +38,26 @@ const SignIn = () => {
                       brand: '#404040',
                       brandAccent: '#52525b'
                     }
+                  }
+                },
+                style: {
+                  input: { fontSize: '16px' },
+                  label: { fontSize: '12px', color: 'white' }
+                }
+              }}
+              localization={{
+                variables: {
+                  sign_in: {
+                    email_label: 'Email Address',
+                    email_input_placeholder: 'Email Address',
+                    password_label: 'Password',
+                    password_input_placeholder: 'Password'
+                  },
+                  sign_up: {
+                    email_label: 'Email Address',
+                    email_input_placeholder: 'Email Address',
+                    password_label: 'New Password',
+                    password_input_placeholder: 'New Password'
                   }
                 }
               }}

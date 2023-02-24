@@ -10,14 +10,19 @@
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=saas-starter"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.11",
     "@stripe/stripe-js": "1.22.0",
     "@supabase/auth-helpers-nextjs": "^0.4.1",
     "@supabase/auth-helpers-react": "^0.3.0",
     "@supabase/auth-ui-react": "^0.2.6",
     "@supabase/supabase-js": "^2.0.0",
     "classnames": "2.3.1",
+    "core-js-pure": "^3.28.0",
+    "flowbite": "^1.6.3",
+    "flowbite-react": "^0.3.8",
     "next": "^12.2.5",
     "react": "17.0.2",
+    "react-avatar": "^5.0.3",
     "react-dom": "17.0.2",
     "react-merge-refs": "1.1.0",
     "stripe": "8.201.0",
@@ -31,6 +36,7 @@
     "autoprefixer": "^10.4.2",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
+    "eslint-config-prettier": "^8.6.0",
     "postcss": "8.4.5",
     "prettier": "2.5.1",
     "typescript": "^4.5.5"

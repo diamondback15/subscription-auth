@@ -47,13 +47,13 @@ export default function Pricing({ products }: Props) {
 
   if (!products.length)
     return (
-      <section className="bg-black">
+      <section className="">
         <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
           <div className="sm:flex sm:flex-col sm:align-center"></div>
           <p className="text-6xl font-extrabold text-white sm:text-center sm:text-6xl">
             No subscription pricing plans found. Create them in your{' '}
             <a
-              className="text-pink-500 underline"
+              className="text-slate-50 underline"
               href="https://dashboard.stripe.com/products"
               rel="noopener noreferrer"
               target="_blank"
@@ -67,7 +67,7 @@ export default function Pricing({ products }: Props) {
     );
 
   return (
-    <section className="bg-black">
+    <section className="bg-gray-900">
       <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
           <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
@@ -77,15 +77,15 @@ export default function Pricing({ products }: Props) {
             Start building for free, then add a site plan to go live. Account
             plans unlock additional features.
           </p>
-          <div className="relative self-center mt-6 bg-zinc-900 rounded-lg p-0.5 flex sm:mt-8 border border-zinc-800">
+          <div className="text-center relative self-center mt-6 bg-gray-800 rounded-full p-0.5 flex sm:mt-8 border border-zinc-800">
             <button
               onClick={() => setBillingInterval('month')}
               type="button"
               className={`${
                 billingInterval === 'month'
-                  ? 'relative w-1/2 bg-zinc-700 border-zinc-800 shadow-sm text-white'
+                  ? 'relative w-1/2 bg-gray-700 border-zinc-800 shadow-sm text-white'
                   : 'ml-0.5 relative w-1/2 border border-transparent text-zinc-400'
-              } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
+              } rounded-full m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-slate-50 focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
             >
               Monthly billing
             </button>
@@ -94,66 +94,79 @@ export default function Pricing({ products }: Props) {
               type="button"
               className={`${
                 billingInterval === 'year'
-                  ? 'relative w-1/2 bg-zinc-700 border-zinc-800 shadow-sm text-white'
+                  ? 'relative w-1/2 bg-gray-700 border-zinc-800 shadow-sm text-white'
                   : 'ml-0.5 relative w-1/2 border border-transparent text-zinc-400'
-              } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
+              } rounded-full m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-slate-50 focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
             >
               Yearly billing
             </button>
           </div>
         </div>
-        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
-          {products.map((product) => {
-            const price = product?.prices?.find(
-              (price) => price.interval === billingInterval
-            );
-            if (!price) return null;
-            const priceString = new Intl.NumberFormat('en-US', {
-              style: 'currency',
-              currency: price.currency,
-              minimumFractionDigits: 0
-            }).format((price?.unit_amount || 0) / 100);
-            return (
-              <div
-                key={product.id}
-                className={cn(
-                  'rounded-lg shadow-sm divide-y divide-zinc-600 bg-zinc-900',
-                  {
-                    'border border-pink-500': subscription
-                      ? product.name === subscription?.prices?.products?.name
-                      : product.name === 'Freelancer'
-                  }
-                )}
-              >
-                <div className="p-6">
-                  <h2 className="text-2xl leading-6 font-semibold text-white">
-                    {product.name}
-                  </h2>
-                  <p className="mt-4 text-zinc-300">{product.description}</p>
-                  <p className="mt-8">
-                    <span className="text-5xl font-extrabold white">
-                      {priceString}
-                    </span>
-                    <span className="text-base font-medium text-zinc-100">
-                      /{billingInterval}
-                    </span>
-                  </p>
-                  <Button
-                    variant="slim"
-                    type="button"
-                    disabled={isLoading}
-                    loading={priceIdLoading === price.id}
-                    onClick={() => handleCheckout(price)}
-                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-zinc-900"
-                  >
-                    {product.name === subscription?.prices?.products?.name
-                      ? 'Manage'
-                      : 'Subscribe'}
-                  </Button>
+        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-4xl xl:mx-auto xl:grid-cols-3">
+          {products
+            .sort((a, b) => {
+              const aPrice = a.prices?.find(
+                (price) => price.interval === billingInterval
+              );
+              const bPrice = b.prices?.find(
+                (price) => price.interval === billingInterval
+              );
+              if (aPrice && bPrice)
+                return aPrice.unit_amount! - bPrice.unit_amount!;
+
+              return 0;
+            })
+            .map((product) => {
+              const price = product?.prices?.find(
+                (price) => price.interval === billingInterval
+              );
+              if (!price) return null;
+              const priceString = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: price.currency,
+                minimumFractionDigits: 0
+              }).format((price?.unit_amount || 0) / 100);
+              return (
+                <div
+                  key={product.id}
+                  className={cn(
+                    'rounded-lg shadow-sm divide-y divide-zinc-600 bg-gray-800',
+                    {
+                      'border border-white': subscription
+                        ? product.name === subscription?.prices?.products?.name
+                        : product.name === 'Freelancer'
+                    }
+                  )}
+                >
+                  <div className="p-6">
+                    <h2 className="text-2xl leading-6 font-semibold text-white">
+                      {product.name}
+                    </h2>
+                    <p className="mt-4 text-zinc-300">{product.description}</p>
+                    <p className="mt-8">
+                      <span className="text-5xl font-extrabold white">
+                        {priceString}
+                      </span>
+                      <span className="text-base font-medium text-zinc-100">
+                        /{billingInterval}
+                      </span>
+                    </p>
+                    <Button
+                      variant="slim"
+                      type="button"
+                      disabled={isLoading}
+                      loading={priceIdLoading === price.id}
+                      onClick={() => handleCheckout(price)}
+                      className="mt-8 block w-full py-2 text-sm font-semibold text-white text-center hover:bg-slate-200"
+                    >
+                      {product.name === subscription?.prices?.products?.name
+                        ? 'Manage'
+                        : 'Subscribe'}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
         <div>
           <p className="mt-24 text-xs uppercase text-zinc-400 text-center font-bold tracking-[0.3em]">
