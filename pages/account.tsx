@@ -8,6 +8,7 @@ import { postData } from 'utils/helpers';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import Title from '@/components/ui/Title';
 
 interface Props {
   title: string;
@@ -62,9 +63,7 @@ export default function Account({ user }: { user: User }) {
     <section className="mb-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
-            Account
-          </h1>
+          <Title variant="lg">Account</Title>
           <p className="mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl max-w-2xl m-auto">
             We partnered with Stripe for a simplified billing.
           </p>
@@ -109,11 +108,20 @@ export default function Account({ user }: { user: User }) {
           </div>
         </Card>
         <Card
-          title="Your Name"
-          description="Please enter your full name, or a display name you are comfortable with."
-          footer={<p>Please use 64 characters at maximum.</p>}
+          title="Your Email"
+          description="In order to change your email, you have to create a new account"
+          // footer={<p>We will email you to verify the change.</p>}
         >
-          <div className="text-xl mt-8 mb-4 font-semibold">
+          <p className="text-xl mt-8 mb-4 font-semibold">
+            {user ? user.email : undefined}
+          </p>
+        </Card>
+        <Card
+          title="Your Password"
+          description="To reset your password, you need to sign out and click on forget password on the signin"
+          // footer={<p>Please use 64 characters at maximum.</p>}
+        >
+          {/* <div className="text-xl mt-8 mb-4 font-semibold">
             {userDetails ? (
               `${
                 userDetails.full_name ??
@@ -124,16 +132,7 @@ export default function Account({ user }: { user: User }) {
                 <LoadingDots />
               </div>
             )}
-          </div>
-        </Card>
-        <Card
-          title="Your Email"
-          description="Please enter the email address you want to use to login."
-          footer={<p>We will email you to verify the change.</p>}
-        >
-          <p className="text-xl mt-8 mb-4 font-semibold">
-            {user ? user.email : undefined}
-          </p>
+          </div> */}
         </Card>
       </div>
     </section>

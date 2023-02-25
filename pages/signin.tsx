@@ -41,8 +41,21 @@ const SignIn = () => {
                   }
                 },
                 style: {
-                  input: { fontSize: '16px' },
-                  label: { fontSize: '12px', color: 'white' }
+                  input: {
+                    fontSize: '14px',
+                    background: 'transparent',
+                    borderColor: 'rgb(107 114 128 / var(--tw-bg-opacity))'
+                  },
+                  label: { fontSize: '12px', color: 'white' },
+                  button: {
+                    background: 'white',
+                    color: 'black',
+                    fontWeight: '500',
+                    border: 0
+                  },
+                  divider: {
+                    backgroundColor: 'rgb(107 114 128 / var(--tw-bg-opacity))'
+                  }
                 }
               }}
               localization={{

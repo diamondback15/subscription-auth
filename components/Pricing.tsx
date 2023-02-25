@@ -7,6 +7,7 @@ import { postData } from 'utils/helpers';
 import { getStripe } from 'utils/stripe-client';
 import { useUser } from 'utils/useUser';
 import { Price, ProductWithPrice } from 'types';
+import Title from './ui/Title';
 
 interface Props {
   products: ProductWithPrice[];
@@ -70,12 +71,11 @@ export default function Pricing({ products }: Props) {
     <section className="bg-gray-900">
       <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
-            Pricing Plans
-          </h1>
-          <p className="mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl max-w-2xl m-auto">
-            Start building for free, then add a site plan to go live. Account
-            plans unlock additional features.
+          <Title variant="lg">Pricing Plans</Title>
+          <p className="mt-5 text-xl text-zinc-200 sm:text-center sm:text-xl max-w-2xl m-auto">
+            Start building for free, then add a site plan to go live.
+            <br />
+            Account plans unlock additional features.
           </p>
           <div className="text-center relative self-center mt-6 bg-gray-800 rounded-full p-0.5 flex sm:mt-8 border border-zinc-800">
             <button
@@ -134,11 +134,11 @@ export default function Pricing({ products }: Props) {
                     {
                       'border border-white': subscription
                         ? product.name === subscription?.prices?.products?.name
-                        : product.name === 'Freelancer'
+                        : product.name === 'Pro'
                     }
                   )}
                 >
-                  <div className="p-6">
+                  <div className="p-6 relative">
                     <h2 className="text-2xl leading-6 font-semibold text-white">
                       {product.name}
                     </h2>
@@ -148,7 +148,7 @@ export default function Pricing({ products }: Props) {
                         {priceString}
                       </span>
                       <span className="text-base font-medium text-zinc-100">
-                        /{billingInterval}
+                        /&nbsp;{billingInterval}
                       </span>
                     </p>
                     <Button
@@ -163,6 +163,11 @@ export default function Pricing({ products }: Props) {
                         ? 'Manage'
                         : 'Subscribe'}
                     </Button>
+                    {product.name === 'Pro' ? (
+                      <div className="rounded-full py-1 px-3 block bg-white text-black font-medium text-xs top-3 right-3 absolute">
+                        Best option
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               );
@@ -170,7 +175,7 @@ export default function Pricing({ products }: Props) {
         </div>
         <div>
           <p className="mt-24 text-xs uppercase text-zinc-400 text-center font-bold tracking-[0.3em]">
-            Brought to you by
+            As seen on
           </p>
           <div className="flex flex-col items-center my-12 space-y-4 sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-6 sm:grid-cols-5">
             <div className="flex items-center justify-start">

@@ -47,7 +47,7 @@ const Navbar = () => {
           </button>
         </div>
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+          <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 text-sm">
             <div className="py-1 divide-y-2">
               <Link href="/account">
                 <a
@@ -105,7 +105,6 @@ const Navbar = () => {
                 </Button>
               </Link>
             )}
-            {/* <MyMenu /> */}
           </div>
         </div>
       </div>
